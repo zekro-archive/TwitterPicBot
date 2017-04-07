@@ -35,7 +35,7 @@ public class HTMLGetter {
 
         try {
             Document doc = Jsoup.connect(url).get();
-            out = doc.select(".u.regular.username").text().split(" ")[0];
+            out = doc.select("h1").select(".username-with-symbol.u").text();
         } catch (IOException e) {
             e.printStackTrace();
         }

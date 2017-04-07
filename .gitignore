@@ -1,0 +1,4 @@
+.idea/kotlinc.xml
+*.xml
+target/classes/TwitterManager.class
+*.class
