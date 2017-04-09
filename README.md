@@ -30,7 +30,7 @@ screen -L -S picBot java -jar TwitterPicBot.jar -start 16:00:00_12-12-2017 -inte
 <img src="https://image.flaticon.com/icons/svg/188/188238.svg" width="15"/>  At last, put some nice DeviantArt Artworks as links in the 'piclist.txt'. The bot will post them and will delete the last send picture link out of the list.
 <br/><br/><img src="http://image.prntscr.com/image/1fb0b161e25f45d4a94cc7dd4ab0fd00.png" width=""/>
 
-## Used libarys
+## Used libraries
 - <a href="http://twitter4j.org/en/index.html">twitter4j</a>
 - <a href="https://jsoup.org/">jsoup</a>
 - <a href="https://github.com/mwanji/toml4j">Toml4j</a>
