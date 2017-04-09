@@ -20,7 +20,17 @@ public class Main {
         SECRETS.ACCESS_TOKEN = SECRETS.getElement("ACCESS_TOKEN");
         SECRETS.ACCESS_SECRET = SECRETS.getElement("ACCESS_SECRET");
 
+        try {
+            timerVariables.get(args);
+        } catch (Exception e) {
+            System.out.println( "Please chose interval (in h) and start date in arguments!\n" +
+                                "Example: 'java -jar TwitterPicBot.jar -interval 4 -start 16:00:00_09-12-2017'\n" +
+                                "(In this case, the bot will post a picture every 4 hours after 16:00 in 9th December 2017.)");
+            System.exit(0);
+        }
 
+
+        DateFormat df = new SimpleDateFormat("HH:mm:ss_dd-MM-yyyy");
         Timer timer = new Timer();
 
         timer.schedule(new TimerTask() {
@@ -32,10 +42,7 @@ public class Main {
                     e.printStackTrace();
                 }
             }
-        }, 0, 8*60*60*1000);
-
-        //System.out.println("Enter Deviantart-URL: ");
-        //send (new Scanner(System.in).next());
+        }, df.parse(timerVariables.start), timerVariables.period);
 
     }
 
@@ -74,7 +81,23 @@ public class Main {
             }
             bw.close();
 
+        } else
+            System.out.println(df.format(date) + " List empty -> Sendet nothing...");
+    }
+
+    public static class timerVariables {
+
+        static int period = 1000;
+        static String start = "";
+
+        static void get(String[] args) {
+            List<String> argsList = new ArrayList<String>();
+            for (String s : args) {
+                argsList.add(s);
+            }
+            period = Integer.parseInt(argsList.get(argsList.indexOf("-interval") + 1)) * 60 * 60 * 1000;
+            start = argsList.get(argsList.indexOf("-start") + 1);
         }
-        System.out.println(df.format(date) + " List empty -> Sendet nothing...");
+
     }
 }
