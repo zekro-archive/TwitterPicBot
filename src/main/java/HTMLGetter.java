@@ -19,8 +19,15 @@ public class HTMLGetter {
         String out = "";
 
         try {
-            Document doc = Jsoup.connect(url).get();
-            out = doc.select(".title").text();
+
+            Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36").get();
+
+            if (url.contains("deviantart"))
+                out = doc.select(".title").text();
+            else if (url.contains("artstation"))
+                out = doc.select("title").text().split("-")[1].replaceFirst(" ", "").split(",")[0];
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,8 +41,14 @@ public class HTMLGetter {
         String out = "";
 
         try {
-            Document doc = Jsoup.connect(url).get();
-            out = doc.select("h1").select(".username-with-symbol.u").text();
+
+            Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36").get();
+
+            if (url.contains("deviantart"))
+                out = doc.select("h1").select(".username-with-symbol.u").text();
+            else if (url.contains("artstation"))
+                out = doc.select("title").text().split("-")[1].split(",")[1].replaceFirst(" ", "");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,8 +62,14 @@ public class HTMLGetter {
         String out = "";
 
         try {
-            Document doc = Jsoup.connect(url).get();
-            out = doc.select(".dev-content-normal").attr("src");
+
+            Document doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36").get();
+
+            if (url.contains("deviantart"))
+                out = doc.select(".dev-content-normal").attr("src");
+            else if (url.contains("artstation"))
+                out = doc.select("[property=\"og:image\"]").attr("content");
+
         } catch (IOException e) {
             e.printStackTrace();
         }

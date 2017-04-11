@@ -22,6 +22,12 @@ public class Main {
 
         try {
             timerVariables.get(args);
+            System.out.println(
+                    "[ TWITTER PIC BOT STARTED ]\n" +
+                            "Started: " + new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss").format(new Date()) + "\n" +
+                            "Start: " + timerVariables.start.split("_")[1].replaceAll("-", "/") + " - " + timerVariables.start.split("_")[0] + "\n" +
+                            "Period: " + (timerVariables.period / 3600000) + " h\n\n"
+            );
         } catch (Exception e) {
             System.out.println( "Please chose interval (in h) and start date in arguments!\n" +
                                 "Example: 'java -jar TwitterPicBot.jar -interval 4 -start 16:00:00_09-12-2017'\n" +
@@ -60,8 +66,8 @@ public class Main {
     public static void sendFromList() throws IOException {
 
         BufferedReader br = new BufferedReader(new FileReader("piclist.txt"));
-        Date date = new Date();
         DateFormat df = new SimpleDateFormat("[dd/MM/yyyy - HH:mm:ss]");
+        Date date = new Date();
 
         String nextLine;
         List<String> allLines = new ArrayList<String>();
@@ -73,7 +79,7 @@ public class Main {
         if (allLines.size() > 0) {
 
             send(allLines.get(0));
-            System.out.println(df.format(date) + " Sendet " + allLines.get(0));
+            System.out.println(df.format(date) + "[Queued: " + allLines.size() + "] " + " Sendet " + allLines.get(0));
             BufferedWriter bw = new BufferedWriter(new FileWriter("piclist.txt"));
             allLines = allLines.subList(1, allLines.size());
             for (String s : allLines) {
