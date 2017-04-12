@@ -60,4 +60,25 @@ public class TwitterManager {
 
     }
 
+    public static void sendRaw(String msg) {
+
+        ConfigurationBuilder confBuilder = new ConfigurationBuilder();
+
+        confBuilder.setDebugEnabled(true)
+                .setOAuthConsumerKey(SECRETS.CONSUMER_KEY)
+                .setOAuthConsumerSecret(SECRETS.CONSUMER_SECRET)
+                .setOAuthAccessToken(SECRETS.ACCESS_TOKEN)
+                .setOAuthAccessTokenSecret(SECRETS.ACCESS_SECRET);
+
+        TwitterFactory twitterFactory = new TwitterFactory(confBuilder.build());
+        Twitter twitter = twitterFactory.getInstance();
+
+        try {
+            twitter.updateStatus(msg);
+        } catch (TwitterException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 }

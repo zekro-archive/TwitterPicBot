@@ -1,3 +1,5 @@
+import com.moandjiezana.toml.Toml;
+import com.moandjiezana.toml.TomlWriter;
 import twitter4j.TwitterException;
 import java.io.*;
 import java.text.DateFormat;
@@ -26,7 +28,8 @@ public class Main {
                     "[ TWITTER PIC BOT STARTED ]\n" +
                             "Started: " + new SimpleDateFormat("dd/MM/yyyy - HH:mm:ss").format(new Date()) + "\n" +
                             "Start: " + timerVariables.start.split("_")[1].replaceAll("-", "/") + " - " + timerVariables.start.split("_")[0] + "\n" +
-                            "Period: " + (timerVariables.period / 3600000) + " h\n\n"
+                            "Period: " + (timerVariables.period / 3600000) + " h\n" +
+                            "Daily Jokes: " + timerVariables.jokes + "\n\n"
             );
         } catch (Exception e) {
             System.out.println( "Please chose interval (in h) and start date in arguments!\n" +
@@ -38,7 +41,6 @@ public class Main {
 
         DateFormat df = new SimpleDateFormat("HH:mm:ss_dd-MM-yyyy");
         Timer timer = new Timer();
-
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -49,6 +51,23 @@ public class Main {
                 }
             }
         }, df.parse(timerVariables.start), timerVariables.period);
+
+        if (timerVariables.jokes) {
+
+            String dateToday = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+
+            Timer jokeTimer = new Timer();
+            jokeTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    try {
+                        sendJoke();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, new SimpleDateFormat("HH:mm:ss dd-MM-yyyy").parse("18:00:00 " + dateToday), 24*60*60*1000);
+        }
 
     }
 
@@ -95,6 +114,7 @@ public class Main {
 
         static int period = 1000;
         static String start = "";
+        static boolean jokes = false;
 
         static void get(String[] args) {
             List<String> argsList = new ArrayList<String>();
@@ -103,7 +123,38 @@ public class Main {
             }
             period = Integer.parseInt(argsList.get(argsList.indexOf("-interval") + 1)) * 60 * 60 * 1000;
             start = argsList.get(argsList.indexOf("-start") + 1);
+            jokes = argsList.contains("-jokes");
+
         }
+
+    }
+
+    public static void sendJoke() throws IOException {
+
+        File f = new File("jokecount.tml");
+        FileWriter w;
+        Toml t;
+        long count;
+
+        if (!f.exists()) {
+            w = new FileWriter("jokecount.tml");
+            w.write("count = 0");
+            w.close();
+        }
+        t = new Toml().read(f);
+        count = t.getLong("count");
+
+        count++;
+
+        TwitterManager.sendRaw(
+                "Daily joke #" + count + "\n" +
+                "\"" + RandomJokes.get() + "\""
+        );
+
+        TomlWriter tw = new TomlWriter();
+        Map<String, Object> map = new HashMap<>();
+        map.put("count", count);
+        tw.write(map, f);
 
     }
 }
