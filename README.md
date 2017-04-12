@@ -2,7 +2,11 @@
 
 ## Function
 
-This is a little bot posting periodically pictures from a list of deviant art atrwork links to your twitter account.
+This is a little bot posting periodically pictures from a list of Deviantart/Artstation atrwork links to your twitter account.
+
+Supported Platforms:<br/>
+<img src="http://orig03.deviantart.net/0c20/f/2015/052/3/4/deviantart_logo_2__green_original___by_siamvocaloid01-d8ix39x.png" width="50">
+<img src="http://t07.deviantart.net/l3Ekd32TZNo9y1M7I8qlqNTm9jY=/fit-in/300x900/filters:no_upscale():origin()/pre03/c38a/th/pre/f/2015/322/4/e/artstation_logo_vertical_white_800_by_phaeton99-d9h4s5p.png" width="50"><br/><br/>
 
 <img src="http://image.prntscr.com/image/7394b1559737428db2dbe196c9e08f2d.png"/>
 
@@ -27,7 +31,7 @@ If you want to run it on a linux server, use this command:
 screen -L -S picBot java -jar TwitterPicBot.jar -start 16:00:00_12-12-2017 -interval 4
 ```
 
-<img src="https://image.flaticon.com/icons/svg/188/188238.svg" width="15"/>  At last, put some nice DeviantArt Artworks as links in the 'piclist.txt'. The bot will post them and will delete the last send picture link out of the list.
+<img src="https://image.flaticon.com/icons/svg/188/188238.svg" width="15"/>  At last, put some nice DeviantArt Artworks or Artstation Artwoks as links in the 'piclist.txt'. The bot will post them and will delete the last send picture link out of the list.
 <br/><br/><img src="http://image.prntscr.com/image/1fb0b161e25f45d4a94cc7dd4ab0fd00.png" width=""/>
 
 ## Used libraries
