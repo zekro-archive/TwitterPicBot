@@ -26,6 +26,8 @@ public class HTMLGetter {
                 out = doc.select(".title").text();
             else if (url.contains("artstation"))
                 out = doc.select("title").text().split("-")[1].replaceFirst(" ", "").split(",")[0];
+            else if (url.contains("pixiv"))
+                out = doc.select(".userdata").select(".title").text();
 
 
         } catch (IOException e) {
@@ -48,6 +50,8 @@ public class HTMLGetter {
                 out = doc.select("h1").select(".username-with-symbol.u").text();
             else if (url.contains("artstation"))
                 out = doc.select("title").text().split("-")[1].split(",")[1].replaceFirst(" ", "");
+            else if (url.contains("pixiv"))
+                out = doc.select(".userdata").select(".name").select("a").text();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -69,6 +73,8 @@ public class HTMLGetter {
                 out = doc.select(".dev-content-normal").attr("src");
             else if (url.contains("artstation"))
                 out = doc.select("[property=\"og:image\"]").attr("content");
+            else if (url.contains("pixiv"))
+                out = doc.select(".require-register.medium-image._work").select("img").attr("src");
 
         } catch (IOException e) {
             e.printStackTrace();

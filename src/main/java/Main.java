@@ -17,6 +17,11 @@ public class Main {
 
     public static void main(String[] args) throws ParseException {
 
+        // FOR TESTING PURPOSES
+        //HTMLGetter.url = "http://www.pixiv.net/member_illust.php?mode=medium&illust_id=61997631";
+        //System.out.println("\"" + HTMLGetter.title() + "\"" + " by " + HTMLGetter.artist() + " | " + HTMLGetter.imgUrl());
+        //System.exit(0);
+
         SECRETS.CONSUMER_KEY = SECRETS.getElement("CONSUMER_KEY");
         SECRETS.CONSUMER_SECRET = SECRETS.getElement("CONSUMER_SECRET");
         SECRETS.ACCESS_TOKEN = SECRETS.getElement("ACCESS_TOKEN");
@@ -71,7 +76,7 @@ public class Main {
 
     }
 
-    public static void send(String url) {
+    private static void send(String url) {
 
         HTMLGetter.url = url;
         try {
@@ -82,14 +87,14 @@ public class Main {
 
     }
 
-    public static void sendFromList() throws IOException {
+    private static void sendFromList() throws IOException {
 
         BufferedReader br = new BufferedReader(new FileReader("piclist.txt"));
         DateFormat df = new SimpleDateFormat("[dd/MM/yyyy - HH:mm:ss]");
         Date date = new Date();
 
         String nextLine;
-        List<String> allLines = new ArrayList<String>();
+        List<String> allLines = new ArrayList<>();
 
         while ((nextLine = br.readLine()) != null) {
             allLines.add(nextLine);
@@ -97,8 +102,13 @@ public class Main {
 
         if (allLines.size() > 0) {
 
-            send(allLines.get(0));
-            System.out.println(df.format(date) + "[Queued: " + allLines.size() + "] " + " Sendet " + allLines.get(0));
+            try {
+                send(allLines.get(0));
+                System.out.println(df.format(date) + "[Queued: " + allLines.size() + "] " + " Sendet " + allLines.get(0));
+            } catch (Exception e) {
+                System.out.println(df.format(date) + "[ERROR] " + e.getMessage());
+                e.printStackTrace();
+            }
             BufferedWriter bw = new BufferedWriter(new FileWriter("piclist.txt"));
             allLines = allLines.subList(1, allLines.size());
             for (String s : allLines) {
@@ -117,10 +127,8 @@ public class Main {
         static boolean jokes = false;
 
         static void get(String[] args) {
-            List<String> argsList = new ArrayList<String>();
-            for (String s : args) {
-                argsList.add(s);
-            }
+            List<String> argsList = new ArrayList<>();
+            argsList.addAll(Arrays.asList(args));
             period = Integer.parseInt(argsList.get(argsList.indexOf("-interval") + 1)) * 60 * 60 * 1000;
             start = argsList.get(argsList.indexOf("-start") + 1);
             jokes = argsList.contains("-jokes");
@@ -129,7 +137,7 @@ public class Main {
 
     }
 
-    public static void sendJoke() throws IOException {
+    private static void sendJoke() throws IOException {
 
         File f = new File("jokecount.tml");
         FileWriter w;
