@@ -4,7 +4,7 @@
 
 This is a little bot posting periodically pictures from a list of Deviantart/Artstation atrwork links to your twitter account.
 
-Supported Platforms:<br/>
+Supported Platforms:  *`Note: The bot is not supporting pixiv colletion and R18 links yet!`*<br/>
 <img src="http://orig03.deviantart.net/0c20/f/2015/052/3/4/deviantart_logo_2__green_original___by_siamvocaloid01-d8ix39x.png" width="45"><img src="http://t07.deviantart.net/l3Ekd32TZNo9y1M7I8qlqNTm9jY=/fit-in/300x900/filters:no_upscale():origin()/pre03/c38a/th/pre/f/2015/322/4/e/artstation_logo_vertical_white_800_by_phaeton99-d9h4s5p.png" width="50"><img src="http://farrowandball.btxmedia.com/pws/client/images/catalogue/products/102005/zoom/102005.jpg" width="15"><img src="http://orig00.deviantart.net/72da/f/2015/183/9/f/pixiv_logo_icon_png_by_vampirehelenaharper-d8zog8c.png" width="45">
 <br/><br/>
 
