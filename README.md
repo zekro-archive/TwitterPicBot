@@ -25,13 +25,13 @@ Supported Platforms:  *`Note: The bot is not supporting pixiv colletion and R18 
 
 <img src="https://image.flaticon.com/icons/svg/188/188237.svg" width="15"/>  Finally, start the bot in console with the following command:
 ```bash
-java -jar TwitterPicBot.jar -start 16:00:00_12-12-2017 -interval 4
+java -jar TwitterPicBot.jar -start 16:00:00_06-12-2017 -interval 4
 ```
-*`In this example, the bot will post a picture every 4 hours after 16:00 in 12th of December 2017`*
+*`In this example, the bot will post a picture every 4 hours after 16:00 in 06th of December 2017`*
 
 If you want to run it on a linux server, use this command:
 ```bash
-screen -L -S picBot java -jar TwitterPicBot.jar -start 16:00:00_12-12-2017 -interval 4
+screen -L -S picBot java -jar TwitterPicBot.jar -start 16:00:00_06-12-2017 -interval 4
 ```
 
 <img src="https://image.flaticon.com/icons/svg/188/188238.svg" width="15"/>  At last, put some nice DeviantArt Artworks or Artstation Artwoks as links in the 'piclist.txt'. The bot will post them and will delete the last send picture link out of the list.
